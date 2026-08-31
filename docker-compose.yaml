@@ -83,6 +83,7 @@ x-airflow-common:
       {"conn_type": "google_cloud_platform",
        "extra": {"project": "project-951ccd40-2ae1-482a-a13",
                  "impersonation_chain": "airflow-bq@project-951ccd40-2ae1-482a-a13.iam.gserviceaccount.com"}}
+    GCS_BUCKET: falabella_demo_bucket
   volumes:
     - ${AIRFLOW_PROJ_DIR:-.}/dags:/opt/airflow/dags
     - ${AIRFLOW_PROJ_DIR:-.}/logs:/opt/airflow/logs
