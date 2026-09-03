@@ -78,18 +78,18 @@ x-airflow-common:
     AIRFLOW_CONFIG: '/opt/airflow/config/airflow.cfg'
     AIRFLOW_CONN_INPUT_DB: 'postgres://inputdb:inputdb@input-db:5432/inputdb'
     GOOGLE_APPLICATION_CREDENTIALS: /opt/airflow/gcp/adc.json
-    GOOGLE_CLOUD_PROJECT: project-951ccd40-2ae1-482a-a13
+    GOOGLE_CLOUD_PROJECT: ${GCP_PROJECT_ID}
     AIRFLOW_CONN_GOOGLE_CLOUD_DEFAULT: >-
       {"conn_type": "google_cloud_platform",
-       "extra": {"project": "project-951ccd40-2ae1-482a-a13",
-                 "impersonation_chain": "airflow-bq@project-951ccd40-2ae1-482a-a13.iam.gserviceaccount.com"}}
-    GCS_BUCKET: falabella_demo_bucket
+       "extra": {"project": "${GCP_PROJECT_ID}",
+                 "impersonation_chain": "${GCP_IMPERSONATION_SA}"}}
+    GCS_BUCKET: ${GCS_BUCKET}
   volumes:
     - ${AIRFLOW_PROJ_DIR:-.}/dags:/opt/airflow/dags
     - ${AIRFLOW_PROJ_DIR:-.}/logs:/opt/airflow/logs
     - ${AIRFLOW_PROJ_DIR:-.}/config:/opt/airflow/config
     - ${AIRFLOW_PROJ_DIR:-.}/plugins:/opt/airflow/plugins
-    - ~/.config/gcloud/application_default_credentials.json:/opt/airflow/gcp/adc.json:ro
+    - ${GCP_ADC_PATH}:/opt/airflow/gcp/adc.json:ro
   user: "${AIRFLOW_UID:-50000}:0"
   depends_on:
     &airflow-common-depends-on
