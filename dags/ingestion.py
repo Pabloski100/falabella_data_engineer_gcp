@@ -6,7 +6,8 @@ from airflow.providers.google.cloud.transfers.gcs_to_bigquery import GCSToBigQue
 
 BUCKET = os.environ["GCS_BUCKET"]
 PROJECT = os.environ["GOOGLE_CLOUD_PROJECT"]
-DATASET = "falabella_gcp_demo"
+DATASET = os.environ["BQ_DATASET"]
+SHIPMENTS_OBJECT = os.environ["GCS_SHIPMENTS_OBJECT"]
 
 with DAG(
     dag_id="ingest_to_bigquery",
@@ -66,7 +67,7 @@ with DAG(
     load_shipments = GCSToBigQueryOperator(
         task_id="load_shipments_csv",
         bucket=BUCKET,
-        source_objects=["source/shipments.csv"],
+        source_objects=[SHIPMENTS_OBJECT],
         destination_project_dataset_table=f"{PROJECT}.{DATASET}.shipments",
         source_format="CSV",
         skip_leading_rows=1,

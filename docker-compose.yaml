@@ -84,6 +84,9 @@ x-airflow-common:
        "extra": {"project": "${GCP_PROJECT_ID}",
                  "impersonation_chain": "${GCP_IMPERSONATION_SA}"}}
     GCS_BUCKET: ${GCS_BUCKET}
+    BQ_DATASET: ${BQ_DATASET}
+    BQ_LOCATION: ${BQ_LOCATION:-US}
+    GCS_SHIPMENTS_OBJECT: ${GCS_SHIPMENTS_OBJECT}
   volumes:
     - ${AIRFLOW_PROJ_DIR:-.}/dags:/opt/airflow/dags
     - ${AIRFLOW_PROJ_DIR:-.}/logs:/opt/airflow/logs

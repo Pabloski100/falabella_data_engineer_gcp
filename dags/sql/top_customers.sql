@@ -1,4 +1,4 @@
-CREATE OR REPLACE TABLE `project-951ccd40-2ae1-482a-a13.falabella_gcp_demo.top_customers` AS
+CREATE OR REPLACE TABLE `{{ params.project }}.{{ params.dataset }}.top_customers` AS
 
 WITH
 
@@ -6,7 +6,7 @@ cte_base_orders AS (
   SELECT
     customer_id
     ,CAST(total_amount AS NUMERIC) total_amount
-  FROM `project-951ccd40-2ae1-482a-a13.falabella_gcp_demo.orders` 
+  FROM `{{ params.project }}.{{ params.dataset }}.orders` 
 )
 
 ,cte_base_customers AS (
@@ -15,7 +15,7 @@ cte_base_orders AS (
     ,name
     ,country
     ,email
-  FROM `project-951ccd40-2ae1-482a-a13.falabella_gcp_demo.customers` 
+  FROM `{{ params.project }}.{{ params.dataset }}.customers` 
 )
 
 ,cte_amount_by_customer AS (

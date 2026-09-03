@@ -1,4 +1,4 @@
-CREATE OR REPLACE TABLE `project-951ccd40-2ae1-482a-a13.falabella_gcp_demo.monthly_growth` AS
+CREATE OR REPLACE TABLE `{{ params.project }}.{{ params.dataset }}.monthly_growth` AS
 
 WITH
 
@@ -6,7 +6,7 @@ cte_base AS (
   SELECT
     CAST(order_date AS DATETIME) order_date
     ,CAST(total_amount AS NUMERIC) total_amount
-  FROM `project-951ccd40-2ae1-482a-a13.falabella_gcp_demo.orders` 
+  FROM `{{ params.project }}.{{ params.dataset }}.orders` 
 )
 
 ,cte_orders_by_month AS (

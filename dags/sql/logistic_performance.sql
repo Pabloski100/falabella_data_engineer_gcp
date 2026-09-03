@@ -1,4 +1,4 @@
-CREATE OR REPLACE TABLE `project-951ccd40-2ae1-482a-a13.falabella_gcp_demo.logistic_performance` AS
+CREATE OR REPLACE TABLE `{{ params.project }}.{{ params.dataset }}.logistic_performance` AS
 
 WITH
 
@@ -6,7 +6,7 @@ cte_base_shipments AS (
   SELECT
     order_id
     ,DATE(delivery_date) AS delivery_date
-  FROM `project-951ccd40-2ae1-482a-a13.falabella_gcp_demo.shipments`
+  FROM `{{ params.project }}.{{ params.dataset }}.shipments`
   WHERE status = "Delivered"
 )
 
@@ -14,7 +14,7 @@ cte_base_shipments AS (
   SELECT
     order_id
     ,DATE(order_date) AS order_date
-  FROM `project-951ccd40-2ae1-482a-a13.falabella_gcp_demo.orders` 
+  FROM `{{ params.project }}.{{ params.dataset }}.orders` 
 )
 
 ,cte_days_to_deliver AS (
